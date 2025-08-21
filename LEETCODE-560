@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& arr, int k) {
+        unordered_map<int,int> map;
+        int count=0;
+        map[0]=1;
+        int prefix=0;
+        for(int i=0;i<arr.size();i++){
+            prefix+=arr[i];
+            if(map.count(prefix-k)){
+                count+=map[prefix-k];
+                map[prefix]++;
+            }else{
+                map[prefix]++;
+            }
+        }
+        return count;
+    }
+};
