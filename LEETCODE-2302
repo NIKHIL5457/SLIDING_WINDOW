@@ -1,0 +1,24 @@
+https://leetcode.com/problems/count-subarrays-with-score-less-than-k/description/
+
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, long long k) {
+        int first=0,second=0;
+        long long prefixsum=0,mul=0,count=0;
+        int n=nums.size();
+        while(second<n){
+            prefixsum=prefixsum+nums[second];
+            mul=prefixsum*(second-first+1);
+            while(mul>=k && first<=second){
+                prefixsum-=nums[first];
+                first++;
+                 mul=prefixsum*(second-first+1);
+            }
+             count+=(second-first+1);
+            second++;
+           
+            
+        }
+        return count;
+    }
+};
