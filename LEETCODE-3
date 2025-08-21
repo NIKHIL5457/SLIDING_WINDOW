@@ -1,0 +1,32 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int first = 0, second = 0, maxlen = 0;
+        vector<bool> s1(256, 0);
+
+        while (second < s.size()) {
+            while (s1[s[second]]) {
+                s1[s[first]] = 0;
+                first++;
+            }
+            s1[s[second]] = 1;
+            maxlen = max(maxlen, second - first + 1);
+            second++;
+        }
+        return maxlen;
+    }
+};
+
+// Example usage
+int main() {
+    Solution sol;
+    string s = "abcabcbb";
+    cout << "Length of longest substring without repeating characters: "
+         << sol.lengthOfLongestSubstring(s) << endl;
+    return 0;
+}
